@@ -1,5 +1,7 @@
 package com.webapp.jerseyRest;
 
+import java.io.IOException;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -31,9 +33,9 @@ public class Resources {
 
 	/*
 	 * @GET
-	 * 
+	 *
 	 * @Path("/dbinfo")
-	 * 
+	 *
 	 * @Produces(MediaType.TEXT_PLAIN) public String getDbPropInfo() throws
 	 * IOException { DatabasePropertiesReader db = new DatabasePropertiesReader();
 	 * return db.getPropValues(); }
@@ -48,7 +50,7 @@ public class Resources {
 	@GET
 	@Path("/Users")
 	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject getUserReadObj() {
+	public JSONObject getUserReadObj() throws IOException {
 		DatabaseBaseMethods dm = new DatabaseBaseMethods();
 		return dm.getDataFromDb();
 	}

@@ -3,18 +3,21 @@ package com.webapp.jerseyRest.ResourceMethods;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class DatabasePropertiesReader {
 
 	String result = "";
 	InputStream inputstrm;
-	private String url;
-	private String usn;
-	private String pwd;
-	private String query;
+	public String url;
+	public String usn;
+	public String pwd;
+	public String query;
 
-	public void getPropValues() throws IOException {
+	public Map<String, String> getPropValues() throws IOException {
+		Map<String, String> propMap = new HashMap<String, String>();
 		try {
 			Properties prop = new Properties();
 			String fileName = "db.properties";
@@ -24,10 +27,15 @@ public class DatabasePropertiesReader {
 			} else {
 				throw new FileNotFoundException("property file '" + fileName + "' not found in the classpath");
 			}
-			this.url = prop.getProperty("url");
+			url = prop.getProperty("url");
+			propMap.put("url", url);
 			usn = prop.getProperty("username");
+			propMap.put("usn", usn);
 			pwd = prop.getProperty("password");
+			propMap.put("pwd", pwd);
 			query = prop.getProperty("query");
+			System.out.println("This is the query for the" + query);
+			propMap.put("query", query);
 			result = "URL : \"" + url + "\" \nUserName : \"" + usn + "\" \nPassword : \"" + pwd + "\"";
 			System.out.println("result-->" + result);
 		} catch (Exception e) {
@@ -35,24 +43,6 @@ public class DatabasePropertiesReader {
 		} finally {
 			inputstrm.close();
 		}
-		// return result;
+		return propMap;
 	}
-
-	public String getPwd() {
-		return pwd;
-	}
-
-	public String getUrl() {
-
-		return url;
-	}
-
-	public String getQuery() {
-		return query;
-	}
-
-	public String getUsn() {
-		return this.usn;
-	}
-
 }
