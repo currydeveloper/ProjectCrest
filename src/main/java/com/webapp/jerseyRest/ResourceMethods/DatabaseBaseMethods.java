@@ -21,7 +21,7 @@ public class DatabaseBaseMethods {
 	public Connection getDbConnection() throws IOException {
 		System.out.println("came into the getDb");
 
-		Map pMap = dc.getPropValues();
+		Map<?, ?> pMap = dc.getPropValues();
 		String URL = (String) pMap.get("url");
 		String uName = (String) pMap.get("usn");
 		String pswd = (String) pMap.get("pwd");
@@ -44,7 +44,7 @@ public class DatabaseBaseMethods {
 	@SuppressWarnings("unchecked")
 	public JSONObject getDataFromDb() throws IOException {
 		Connection conInGetDb = getDbConnection();
-		Map pMap = dc.getPropValues();
+		Map<?, ?> pMap = dc.getPropValues();
 		String Query = (String) pMap.get("query");
 		JSONArray resourceArray = new JSONArray();
 		JSONObject userObj = new JSONObject();
