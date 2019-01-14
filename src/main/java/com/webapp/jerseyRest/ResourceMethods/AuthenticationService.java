@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 public class AuthenticationService {
 	public boolean authenticate(String authCred) {
-		if (null != authCred || authCred.isEmpty()) {
+		if (null == authCred || authCred.isEmpty()) {
 			return false;
 		} else {
 			System.out.println("Starting the authentication of data" + authCred);
