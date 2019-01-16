@@ -11,36 +11,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AuthenticationFilter implements javax.servlet.Filter {
-	public static final String AuthHeader = "Authorization";
-
+	public static final String AUTHENTICATION_HEADER = "Authorization";
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filter)
 			throws IOException, ServletException {
 		if (request instanceof HttpServletRequest) {
-			HttpServletRequest httpServRequest = (HttpServletRequest) request;
-			String authCred = httpServRequest.getHeader(AuthHeader);
+			HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+			String authCred = httpServletRequest.getHeader(AUTHENTICATION_HEADER);
 			AuthenticationService authServ = new AuthenticationService();
-			boolean authStat = authServ.authenticate(authCred);
-			if (authStat) {
+			boolean authStatus = authServ.authenticate(authCred);
+			if (authStatus) {
 				filter.doFilter(request, response);
 			} else {
 				if (response instanceof HttpServletResponse) {
-					HttpServletResponse httpServResponse = (HttpServletResponse) response;
-					httpServResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+					HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+					System.out.println("Requests is rejected");
+					httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 				}
 			}
 		}
-	}
-
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println("this is  a servlet exception here");
 
 	}
 
 	@Override
 	public void destroy() {
-		System.out.println("this is  a destroy mode");
 
 	}
+
+	@Override
+	public void init(FilterConfig arg0) throws ServletException {
+		System.out.println("this is  a servlet exception here");
+
+	}
+
 }

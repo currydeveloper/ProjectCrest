@@ -8,15 +8,17 @@ public class AuthenticationService {
 		if (null == authCred || authCred.isEmpty()) {
 			return false;
 		} else {
-			System.out.println("Starting the authentication of data" + authCred);
-			final String encodedCred = authCred.replace("Basic", "");
+			System.out.println("Starting the authentication of data: " + authCred);
+			final String encodedCred = authCred.replaceFirst("Basic" + " ", "");
+			System.out.println("This is the encoded String:" + encodedCred);
 			String decodeUsn = null;
 			try {
 				byte[] decodeByte = Base64.getDecoder().decode(encodedCred);
+				System.out.println("This is the byte: " + decodeByte.length);
 				decodeUsn = new String(decodeByte, "UTF-8");
 				System.out.println("decode value is" + decodeUsn);
 			} catch (Exception e) {
-				System.out.println("Error in decoding the usn" + e);
+				System.out.println("Error in decoding the usn:" + e);
 			}
 			final StringTokenizer token = new StringTokenizer(decodeUsn, ":");
 			final String usn = token.nextToken();
