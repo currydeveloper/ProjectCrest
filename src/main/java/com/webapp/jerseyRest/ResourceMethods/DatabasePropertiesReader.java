@@ -33,9 +33,9 @@ public class DatabasePropertiesReader {
 			propMap.put("usn", usn);
 			pwd = prop.getProperty("password");
 			propMap.put("pwd", pwd);
-			query = prop.getProperty("query");
-			System.out.println("This is the query for the" + query);
-			propMap.put("query", query);
+			String tableName = prop.getProperty("tableName");
+			System.out.println("This is the tablename " + tableName);
+			propMap.put("tableName", tableName);
 			result = "URL : \"" + url + "\" \nUserName : \"" + usn + "\" \nPassword : \"" + pwd + "\"";
 			System.out.println("result-->" + result);
 		} catch (Exception e) {

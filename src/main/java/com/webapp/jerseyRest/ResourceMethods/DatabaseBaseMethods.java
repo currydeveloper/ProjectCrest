@@ -45,7 +45,9 @@ public class DatabaseBaseMethods {
 	public JSONObject getDataFromDb() throws IOException {
 		Connection conInGetDb = getDbConnection();
 		Map<?, ?> pMap = dc.getPropValues();
-		String Query = (String) pMap.get("query");
+		String tableName = (String) pMap.get("tableName");
+		System.out.println("table name from the map" + tableName);
+		String Query = "select * from " + tableName + ";";
 		JSONArray resourceArray = new JSONArray();
 		JSONObject userObj = new JSONObject();
 
@@ -56,7 +58,7 @@ public class DatabaseBaseMethods {
 		meta.put("version", "1");
 		meta.put("lastModified", "2011-05-13T04:42:34Z");
 		userObj.put("meta", meta);
-
+		System.out.println("This is the Query " + Query);
 		try {
 			if (null != conInGetDb) {
 				Statement st = conInGetDb.createStatement();
