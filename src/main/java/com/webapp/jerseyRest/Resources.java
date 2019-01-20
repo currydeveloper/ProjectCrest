@@ -31,15 +31,7 @@ public class Resources {
 		return serviceProviderConfigJson.getServiceProvConfig();
 	}
 
-	/*
-	 * @GET
-	 *
-	 * @Path("/dbinfo")
-	 *
-	 * @Produces(MediaType.TEXT_PLAIN) public String getDbPropInfo() throws
-	 * IOException { DatabasePropertiesReader db = new DatabasePropertiesReader();
-	 * return db.getPropValues(); }
-	 */
+
 	@GET
 	@Path("/Schemas")
 	@Produces(MediaType.APPLICATION_JSON)
