@@ -31,6 +31,7 @@ public class Resources {
 		return serviceProviderConfigJson.getServiceProvConfig();
 	}
 
+
 	@GET
 	@Path("/Schemas")
 	@Produces(MediaType.APPLICATION_JSON)
