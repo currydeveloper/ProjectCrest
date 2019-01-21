@@ -31,15 +31,6 @@ public class Resources {
 		return serviceProviderConfigJson.getServiceProvConfig();
 	}
 
-	/*
-	 * @GET
-	 *
-	 * @Path("/dbinfo")
-	 *
-	 * @Produces(MediaType.TEXT_PLAIN) public String getDbPropInfo() throws
-	 * IOException { DatabasePropertiesReader db = new DatabasePropertiesReader();
-	 * return db.getPropValues(); }
-	 */
 	@GET
 	@Path("/Schemas")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -54,5 +45,24 @@ public class Resources {
 		DatabaseBaseMethods dm = new DatabaseBaseMethods();
 		return dm.getDataFromDb();
 	}
+
+	//	// Testing new functionality
+	//	@GET
+	//	@Path("/Users/{id}")
+	//	@Produces({ "application/json" })
+	//	public JSONObject getTestResources(@PathParam("id") String id) throws IOException, SQLException {
+	//		System.out.println("This is the id" + id);
+	//		return UsersDataWithId.getUserInfoWithId(id);
+	//	}
+	//
+	//	@GET
+	//	@Path("/test")
+	//	@Produces({ "application/json" })
+	//	public JSONObject getTestResourceWithCount(@QueryParam("count") int count,
+	//			@QueryParam("attributes") int attributes) {
+	//		System.out.println("This is the count" + count);
+	//		System.out.println("This is the attributes" + attributes);
+	//		return serviceProviderConfigJson.getServiceProvConfig();
+	//	}
 
 }

@@ -57,7 +57,11 @@ public class DatabaseBaseMethods {
 		meta.put("created", "2010-01-23T04:56:22Z");
 		meta.put("version", "1");
 		meta.put("lastModified", "2011-05-13T04:42:34Z");
-		userObj.put("meta", meta);
+		userObj.put("totalResults", 1);
+		userObj.put("itemsPerPage", 1);
+		JSONArray listJson=new JSONArray();
+		listJson.add("urn:ietf:params:scim:api:messages:2.0:ListResponse");
+		userObj.put("schemas", listJson);
 		System.out.println("This is the Query " + Query);
 		try {
 			if (null != conInGetDb) {
@@ -69,6 +73,7 @@ public class DatabaseBaseMethods {
 					for (int i = 0; i < metaData.getColumnCount(); i++) {
 						tmpJson.put(metaData.getColumnLabel(i + 1), rs.getObject(i + 1));
 					}
+					tmpJson.put("meta", meta);
 					resourceArray.add(tmpJson);
 					break;
 				}
