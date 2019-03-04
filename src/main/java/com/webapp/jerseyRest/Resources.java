@@ -1,17 +1,22 @@
 package com.webapp.jerseyRest;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.json.simple.JSONObject;
 
-import com.webapp.jerseyRest.ResourceMethods.DatabaseBaseMethods;
 import com.webapp.jerseyRest.ResourceMethods.ResourceTypes;
 import com.webapp.jerseyRest.ResourceMethods.SchemaContainer;
+import com.webapp.jerseyRest.ResourceMethods.UsersDataWithId;
+import com.webapp.jerseyRest.ResourceMethods.postRequest;
 import com.webapp.jerseyRest.ResourceMethods.serviceProviderConfigJson;
 
 @Path("/Resources")
@@ -39,22 +44,31 @@ public class Resources {
 		return SchemaContainer.schemaResource();
 	}
 
+	//	@GET
+	//	@Path("/Users")
+	//	@Produces(MediaType.APPLICATION_JSON)
+	//	public JSONObject getUserReadObj() throws IOException {
+	//		DatabaseBaseMethods dm = new DatabaseBaseMethods();
+	//		return dm.getDataFromDb();
+	//	}
+
+	// Testing new functionality
 	@GET
-	@Path("/Users")
-	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject getUserReadObj() throws IOException {
-		DatabaseBaseMethods dm = new DatabaseBaseMethods();
-		return dm.getDataFromDb();
+	@Path("/Users/{id}")
+	@Produces({ "application/json" })
+	public JSONObject getTestResources(@PathParam("id") String id) throws IOException, SQLException {
+		System.out.println("This is the id" + id);
+		return UsersDataWithId.getUserInfoWithId(id);
 	}
 
-	//	// Testing new functionality
-	//	@GET
-	//	@Path("/Users/{id}")
-	//	@Produces({ "application/json" })
-	//	public JSONObject getTestResources(@PathParam("id") String id) throws IOException, SQLException {
-	//		System.out.println("This is the id" + id);
-	//		return UsersDataWithId.getUserInfoWithId(id);
-	//	}
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/Users")
+	public JSONObject getUsers(JSONObject Users) {
+		System.out.println("recieved parameters" + Users.toString());
+		return postRequest.createUsers(Users);
+	}
 	//
 	//	@GET
 	//	@Path("/test")
