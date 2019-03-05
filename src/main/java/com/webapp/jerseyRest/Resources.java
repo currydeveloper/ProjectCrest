@@ -65,19 +65,9 @@ public class Resources {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/Users")
-	public JSONObject getUsers(JSONObject Users) {
+	public JSONObject getUsers(JSONObject Users) throws IOException {
 		System.out.println("recieved parameters" + Users.toString());
 		return postRequest.createUsers(Users);
 	}
-	//
-	//	@GET
-	//	@Path("/test")
-	//	@Produces({ "application/json" })
-	//	public JSONObject getTestResourceWithCount(@QueryParam("count") int count,
-	//			@QueryParam("attributes") int attributes) {
-	//		System.out.println("This is the count" + count);
-	//		System.out.println("This is the attributes" + attributes);
-	//		return serviceProviderConfigJson.getServiceProvConfig();
-	//	}
 
 }
